@@ -14,16 +14,24 @@ class Generator():
         
         return False
 
-    def generate(self) -> str:
+    def generate(self, n:int = 1) -> str:
         """
         Generate a unique identifier based on the current time.
+        Args:
+            n (int): number of ID's to return. 
         """
-        sleep((100-self.get_tick()%100)/1000)
+        identifiers = []
 
-        timecode = int(self.get_tick()/100)
-        pairity = self.pairity(timecode)
-        return int_to_base34(timecode) + pairity
-    
+        for i in range(n):
+            sleep((100-self.get_tick()%100)/1000)
+            timecode = int(self.get_tick()/100)
+            pairity = self.pairity(timecode)
+            value = int_to_base34(timecode) + pairity
+            if self.check(value) == False:
+                raise Exception("Generator pairity check failed")
+            identifiers.append(value)
+        return tuple(identifiers)
+ 
     def get_tick(self) -> int:
         """
         Get the current time in 100's of microseconds since the epoch.
