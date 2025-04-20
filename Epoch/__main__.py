@@ -1,6 +1,8 @@
 import argparse
 from Epoch import Generator
 import sys
+from Epoch.GUI import Epoch
+from PyQt6.QtWidgets import QApplication
 
 def main():
     parser = argparse.ArgumentParser(
@@ -32,7 +34,10 @@ def main():
     generator = Generator()
 
     if args.gui:
-        return
+        app = QApplication(sys.argv)
+        window = Epoch()
+        window.show()
+        return app.exec()
 
     if args.check:
         check = generator.check(args.check)
