@@ -1,5 +1,6 @@
 from PyQt6.QtWidgets import QWidget, QMainWindow, QPushButton, QLabel, QVBoxLayout, QHBoxLayout, QLineEdit
-from PyQt6.QtWidgets import QTabWidget, QSpinBox, QListWidget
+from PyQt6.QtWidgets import QTabWidget, QSpinBox, QListWidget, QApplication
+from PyQt6.QtGui import QClipboard
 from PyQt6.QtCore import Qt
 from Epoch import Generator
 
@@ -56,6 +57,7 @@ class Generate_Multi(QWidget):
         self.generator = generator
 
         self.list_view = QListWidget()
+        self.list_view.setSelectionMode(QListWidget.SelectionMode.ExtendedSelection)
 
         self.warning_label = QLabel()
         self.warning_label.setText(f"""WARNING: Large batch requests may take some time. \nTime to process current request: 0.1 Seconds""")
@@ -73,14 +75,29 @@ class Generate_Single(QWidget):
         self.setLayout(self.layout)
         self.generator = generator
 
+        self.field = QWidget()
+        layout = QHBoxLayout()
+        self.field.setLayout(layout)
+
         self.id_field = QLabel()
         self.id_field.setTextInteractionFlags(Qt.TextInteractionFlag.TextSelectableByMouse)
-        self.layout.addWidget(self.id_field)
+        layout.addWidget(self.id_field)
+
+        self.copy_button = QPushButton()
+        self.copy_button.setText("Copy")
+        self.copy_button.clicked.connect(self.copy_to_clipboard)
+        layout.addWidget(self.copy_button)
+
+        self.layout.addWidget(self.field)
 
         self.generate_button = QPushButton()
         self.generate_button.setText("Generate ID")
         self.generate_button.clicked.connect(self.generate_value)
         self.layout.addWidget(self.generate_button)
+
+    def copy_to_clipboard(self):
+        clipboard = QApplication.clipboard()
+        clipboard.setText(self.id_field.text(), QClipboard.Mode.Clipboard)
 
     def generate_value(self):
         self.id_field.setText(self.generator.generate()[0])
@@ -93,12 +110,22 @@ class Check_Single(QWidget):
             super().__init__()
             self.layout = QHBoxLayout()
             self.setLayout(self.layout)
+            
+            self.paste_button = QPushButton()
+            self.paste_button.setText("Paste")
+            self.layout.addWidget(self.paste_button)
 
-            self.check_field = QLineEdit()
-            self.layout.addWidget(self.check_field)
+            self.field = QLineEdit()
+            self.layout.addWidget(self.field)
 
             self.check_status = QLabel()
             self.layout.addWidget(self.check_status)
+
+            self.paste_button.clicked.connect(self.paste_clipboard)
+        
+        def paste_clipboard(self):
+            clipboard = QApplication.clipboard()
+            self.field.setText(clipboard.text(QClipboard.Mode.Clipboard))
 
     def __init__(self, generator: Generator):
         super().__init__()
@@ -115,6 +142,6 @@ class Check_Single(QWidget):
         self.layout.addWidget(self.check_button)
 
     def checkButton(self):
-        status = self.generator.check(self.check_field.check_field.text())
+        status = self.generator.check(self.check_field.field.text())
         self.check_field.check_status.setText("Passed \u2705" if status else u"Failed \u274c")
         
