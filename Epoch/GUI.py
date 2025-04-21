@@ -63,6 +63,6 @@ class Check_Single(QWidget):
         self.layout.addWidget(self.check_button)
 
     def checkButton(self):
-        status = self.generator.check(self.check_field.check_field.text)
-        self.check_field.check_status.setText(u"Passed u\2713" if status else u"Failed")
+        status = self.generator.check(self.check_field.check_field.text())
+        self.check_field.check_status.setText("Passed \u2705" if status else u"Failed \u274c")
         
