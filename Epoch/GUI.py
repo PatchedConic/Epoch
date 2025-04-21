@@ -1,4 +1,5 @@
 from PyQt6.QtWidgets import QWidget, QMainWindow, QPushButton, QLabel, QVBoxLayout, QHBoxLayout, QLineEdit
+from PyQt6.QtWidgets import QTabWidget
 from PyQt6.QtCore import Qt
 from Epoch import Generator
 
@@ -10,8 +11,13 @@ class Epoch(QMainWindow):
         self.resize(600, 400)
         self.generator = Generator()
         
+        self.tab_layout = QTabWidget()
+        self.setCentralWidget(self.tab_layout)
+
+        self.tab_layout.addTab(Generate_Single(self.generator), "Generate")
+        self.tab_layout.addTab(Check_Single(self.generator), "Check")
         # self.setCentralWidget(Generate_Single(self.generator))
-        self.setCentralWidget(Check_Single(self.generator))
+        # self.setCentralWidget(Check_Single(self.generator))
 
 class Generate_Single(QWidget):
 
