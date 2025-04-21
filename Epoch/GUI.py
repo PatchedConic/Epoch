@@ -56,15 +56,32 @@ class Generate_Multi(QWidget):
         self.setLayout(self.layout)
         self.generator = generator
 
+        list_group = QWidget()
+        list_layout = QHBoxLayout()
+        list_group.setLayout(list_layout)
+        
         self.list_view = QListWidget()
         self.list_view.setSelectionMode(QListWidget.SelectionMode.ExtendedSelection)
+        list_layout.addWidget(self.list_view)
+
+        self.copy_button = QPushButton()
+        self.copy_button.setText("Copy")
+        self.copy_button.clicked.connect(self.copy_to_clipboard)
+        list_layout.addWidget(self.copy_button)
 
         self.warning_label = QLabel()
         self.warning_label.setText(f"""WARNING: Large batch requests may take some time. \nTime to process current request: 0.1 Seconds""")
 
-        self.layout.addWidget(self.list_view)
+        self.layout.addWidget(list_group)
         self.layout.addWidget(self.warning_label)
         self.layout.addWidget(self.button_layout(self))
+
+    def copy_to_clipboard(self):
+        numbers = []
+        for i in range(self.list_view.count()):
+            numbers.append(self.list_view.item(i).text())
+        clipboard = QApplication.clipboard()
+        clipboard.setText(','.join(numbers))
 
 
 class Generate_Single(QWidget):
