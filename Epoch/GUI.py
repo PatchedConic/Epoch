@@ -1,8 +1,9 @@
 from PyQt6.QtWidgets import QWidget, QMainWindow, QPushButton, QLabel, QVBoxLayout, QHBoxLayout, QLineEdit
-from PyQt6.QtWidgets import QTabWidget, QSpinBox, QListWidget, QApplication
+from PyQt6.QtWidgets import QTabWidget, QSpinBox, QListWidget, QApplication, QFileDialog
 from PyQt6.QtGui import QClipboard
 from PyQt6.QtCore import Qt
 from Epoch import Generator
+import csv
 
 class Epoch(QMainWindow):
     def __init__(self):
@@ -64,10 +65,19 @@ class Generate_Multi(QWidget):
         self.list_view.setSelectionMode(QListWidget.SelectionMode.ExtendedSelection)
         list_layout.addWidget(self.list_view)
 
+        button_stack = QVBoxLayout()
+
         self.copy_button = QPushButton()
         self.copy_button.setText("Copy")
         self.copy_button.clicked.connect(self.copy_to_clipboard)
-        list_layout.addWidget(self.copy_button)
+        button_stack.addWidget(self.copy_button)
+
+        self.export_button = QPushButton()
+        self.export_button.setText("Export")
+        self.export_button.clicked.connect(self.export)
+        button_stack.addWidget(self.export_button)
+
+        list_layout.addLayout(button_stack)
 
         self.warning_label = QLabel()
         self.warning_label.setText(f"""WARNING: Large batch requests may take some time. \nTime to process current request: 0.1 Seconds""")
@@ -75,6 +85,13 @@ class Generate_Multi(QWidget):
         self.layout.addWidget(list_group)
         self.layout.addWidget(self.warning_label)
         self.layout.addWidget(self.button_layout(self))
+
+    def export(self) -> None:
+        file_name, _ = QFileDialog.getSaveFileName(self, "Export", "", "Comma Seperated Values (*.csv);;All Files (*)")
+        if file_name:
+            writer = csv.writer(open(file_name, 'w', newline=''))
+            for i in range(self.list_view.count()):
+                writer.writerow([self.list_view.item(i).text()])
 
     def copy_to_clipboard(self):
         numbers = []
