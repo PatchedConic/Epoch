@@ -3,6 +3,9 @@
 Engineering documents and artifacts are typically controlled using reference IDs such as drawing numbers, part numbers, and serial numbers. Non-significant ID's are typically recorded sequentially with their use noted in a central register. A method and reference implementation is presented here for generating engineering ID's that are unique without requiring a central registry to maintain cognizance of which ID's have been issued and which are available. 
 
 The method uses a central issuing authority to generate an ID that is composed of two parts: an encoded time stamp, and a check digit. Their concatination produces the final ID. An example is shown below. 
+| Complete ID |
+| --- |
+| J3HKZ6Q |
 
 | Time stamp | Check digit|
 | --- | --- |
