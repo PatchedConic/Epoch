@@ -18,7 +18,12 @@ jobs:
 
       - name: Install PyInstaller
         run: pip install pyinstaller  # Installs PyInstaller on the runner
-
+    
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements  # Install your project dependencies
+          
       - name: Build your executable
         run: pyinstaller --onefile Epoch/__main__.py --name Epoch
 
