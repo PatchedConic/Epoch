@@ -34,4 +34,4 @@ To compute the check digit, each character in the base-34 timecode is mapped to 
 \
 $$S = \sum_{i=0}^{n-1}x_i*p_i$$
 
-The check digit is then derived by taking $S mod 34$ and converting the result back to a base-34 character.
+The check digit is then derived by taking $S\ mod\ 34$ and converting the result back to a base-34 character. The result is then appended to the timecode and any prepending characters to form the complete ID.
