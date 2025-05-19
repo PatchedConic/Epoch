@@ -18,8 +18,9 @@ Encoding will be discussed in the next section, however take it as a given that 
 | 0.01 Sec | 0.49 yrs | 16.6 yrs | 566 yrs |
 | 0.1 Sec | 4.9 yrs | 166 yrs | 5662 yrs| 
 
-This is calculated using the formula
-```\frac{34^{n_{length}-1}}{\frac{1}{t_{interval}} * 31,536,000}```
+This is calculated using the formula\
+\
+$$t_{overflow}=\frac{34^{n_{length}-1}}{\frac{1}{t_{interval}} * 31,536,000}$$
 
 Individuals and organizations may utilize various configurations as they find useful. The reference implementation uses 0.01 second intervals. Nine digit numbers are already in common use in the engineering industry, and the balance of response time and service time seem reasonable to the author for most purposes. 
 
