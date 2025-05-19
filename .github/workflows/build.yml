@@ -5,7 +5,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest  # This means run the build on an Ubuntu Linux server
+    runs-on: ubuntu-22.04  # This means run the build on an Ubuntu Linux server
 
     steps:
       - name: Check out your code
@@ -23,7 +23,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements  # Install your project dependencies
-          
+
       - name: Build your executable
         run: pyinstaller --onefile Epoch/__main__.py --name Epoch
 
