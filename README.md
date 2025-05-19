@@ -30,5 +30,8 @@ To form the time stamp element of the ID, the number of time intervals since the
 ### Check Digit
 The addition of a checkdigit to engineering ID's has been discussed by several authors, however its adoption has been fairly limited. The purpose is to verify that the engineering ID value is valid and has not suffered from human transcription errors. 
 
-To compute the check digit, each character in the base-34 timecode is mapped to its corresponding integer value (e.g., `'2' ↦ 2`, `'C' ↦ 12`) according to its position in the base-34 alphabet. Let the timecode consist of $n$ characters, and let $x_i$ denote the integer value of the $i$-th character (indexed from the left, starting at $i = 0$). Each $x_i$ is multiplied by the $i$-th prime\
+To compute the check digit, each character in the base-34 timecode is mapped to its corresponding integer value (e.g., `'2' ↦ 2`, `'C' ↦ 12`) according to its position in the base-34 alphabet. Let the timecode consist of $n$ characters, and let $x_i$ denote the integer value of the $i$-th character (indexed from the left, starting at $i = 0$). Each $x_i$ is multiplied by the $i$-th prime and the result is summed.\
+\
 $$S = \sum_{i=0}^{n-1}x_i*p_i$$
+
+The check digit is then derived by taking $S mod 34$ and converting the result back to a base-34 character.
