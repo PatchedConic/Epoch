@@ -26,3 +26,9 @@ Individuals and organizations may utilize various configurations as they find us
 
 #### Base 34 Encoding
 To form the time stamp element of the ID, the number of time intervals since the epoch at time of ID generation is encoded into base 34. The purpose of encoding the timestamp is for minimizing ID character length. This encoding utilizes the numbers 0 through 9, and latin characters A through Z with the exception of I and O. These letters are dropped as they can easily be confused with the numbers 1 and 0 on engineering documentation that often uses uppercase, sans serif typefaces. 
+
+### Check Digit
+The addition of a checkdigit to engineering ID's has been discussed by several authors, however its adoption has been fairly limited. The purpose is to verify that the engineering ID value is valid and has not suffered from human transcription errors. 
+
+To compute the check digit, each character in the base-34 timecode is mapped to its corresponding integer value (e.g., `'2' ↦ 2`, `'C' ↦ 12`) according to its position in the base-34 alphabet. Let the timecode consist of `n` characters, and let `x_i` denote the integer value of the `i`-th character (indexed from the left, starting at `i = 0`). Each `x_i` is multiplied by the `i`-th prime\
+$$S = \sum_{i=0}^{n-1}x_i*p_i$$
