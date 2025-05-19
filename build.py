@@ -5,7 +5,6 @@ def build():
         "pyinstaller",
         "--onefile",
         "--name", "Epoch",
-        "--icon", "Epoch/icon.png",
         "Epoch/__main__.py",
     ])
 
