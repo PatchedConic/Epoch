@@ -14,5 +14,14 @@ Encoding will be discussed in the next section, however take it as a given that 
 
 | Time Interval | 7 Digit | 8 Digit | 9 Digit |
 | ------------- | ------- | ------- | ------- |
-| 0.001 Sec | xys | sdjf | fkd |
-| 0.01 Sec | 
+| 0.001 Sec | 0.049 yrs | 1.66 yrs | 56 yrs |
+| 0.01 Sec | 0.49 yrs | 16.6 yrs | 566 yrs |
+| 0.1 Sec | 4.9 yrs | 166 yrs | 5662 yrs| 
+
+This is calculated using the formula
+$$\frac{34^{n_{length}-1}}{\frac{1}{t_{interval}} * 31,536,000}$$
+
+Individuals and organizations may utilize various configurations as they find useful. The reference implementation uses 0.01 second intervals. Nine digit numbers are already in common use in the engineering industry, and the balance of response time and service time seem reasonable to the author for most purposes. 
+
+#### Base 34 Encoding
+To form the time stamp element of the ID, the number of time intervals since the epoch at time of ID generation is encoded into base 34. The purpose of encoding the timestamp is for minimizing ID character length. This encoding utilizes the numbers 0 through 9, and latin characters A through Z with the exception of I and O. These letters are dropped as they can easily be confused with the numbers 1 and 0 on engineering documentation that often uses uppercase, sans serif typefaces. 
