@@ -40,3 +40,28 @@ To compute the check digit, each character in the base-34 timecode is mapped to 
 $$S = \sum_{i=0}^{n-1}x_i*p_i$$
 
 The check digit is then derived by taking $S\ mod\ 34$ and converting the result back to a base-34 character. The result is then appended to the timecode and any prepending characters to form the complete ID.
+
+## Reference Implementation - Epoch
+This reference implementation provides CLI, and GUI functionality.
+### CLI Usage
+The reference implementation may be used with a number of options. Pass the -h or --help switch for help with syntax. 
+
+With no options passed, the `Epoch` will produce a single, valid ID.
+
+#### num_ID
+Passing an integer value will produce `num_ID` valid ID's. 
+
+#### -f --file <filepath>
+Saves either a singular or multiple ID's to `<filepath>.csv`
+
+#### -g --gui
+Launches GUI.
+
+#### -c --check <ID>
+Will perform a check on `<ID>` and return `Pass` or `Fail`. 
+
+#### --version
+Prints program version number.
+
+### GUI Usage
+The reference implementation's GUI can be launched either with the GUI binary (Windows only) or by using the -g --gui switch with the binary. The GUI provides utilities for generate single values, checking single values, or generating multiple values. 
