@@ -4,6 +4,7 @@ from time import sleep
 
 class Generator():
 
+    # Fixing some things...
     EPOCH = datetime.datetime(2025, 2, 13, tzinfo = datetime.timezone.utc)
     PRIMES = [3, 5, 7, 11, 13, 17, 19, 23, 29]
 

@@ -1,0 +1,12 @@
+diff --git a/.gitignore b/.gitignore
+index d0227f4..7b0db28 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -175,3 +175,6 @@ cython_debug/
+ 
+ # Task Management
+ todo.*
++
++# Test Output
++test.*
+\ No newline at end of file
