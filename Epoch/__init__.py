@@ -14,7 +14,6 @@ class Generator():
         timestamp = value[:-1]
         check_digit = self.check_digit(base34_to_int(timestamp))
         if check_digit == value[-1]: return True
-        
         return False
 
     def generate(self, n:int = 1) -> str:
