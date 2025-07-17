@@ -7,7 +7,8 @@ PRIMES = [3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43]
 
 class Generator():
 
-
+    FIXED_LENGTH = None
+    PREFIX = None
 
     def check(self, value: str) -> bool:
         timestamp = value[:-1]
@@ -27,10 +28,19 @@ class Generator():
         for i in range(n):
             sleep((10-self.get_tick()%10)/1000)
             timecode = int(self.get_tick()/10)
-            value = int_to_base34(timecode) + self.check_digit(timecode)
-            if self.check(value) == False:
+            # value = int_to_base34(timecode) + self.check_digit(timecode)
+            # value = int_to_base34(timecode).zfill(Generator.FIXED_LENGTH-1) if 
+            #          Generator.FIXED_LENGTH else int_to_base34(timecode)
+            if Generator.FIXED_LENGTH:
+                value = int_to_base34(timecode).zfill(Generator.FIXED_LENGTH-1)
+            else:
+                value = int_to_base34(timecode)
+            check = self.check_digit(value)
+            code = value + check
+            print(code)
+            if self.check(code) == False:
                 raise Exception("Generator check_digit check failed")
-            identifiers.append(value)
+            identifiers.append(code)
         return tuple(identifiers)
  
     def get_tick(self) -> int:
