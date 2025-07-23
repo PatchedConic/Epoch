@@ -98,7 +98,7 @@ class Generate_Multi(QWidget):
         for i in range(self.list_view.count()):
             numbers.append(self.list_view.item(i).text())
         clipboard = QApplication.clipboard()
-        clipboard.setText(','.join(numbers))
+        clipboard.setText('\n'.join(numbers))
 
 
 class Generate_Single(QWidget):
