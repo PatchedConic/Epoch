@@ -1,4 +1,4 @@
-# Epoch Based Document ID
+# Unique, Non-Sequential Engineering Document ID
 ## Concept
 Engineering documents and artifacts are typically controlled using reference IDs such as drawing numbers, part numbers, and serial numbers. Non-significant ID's are typically recorded sequentially with their use noted in a central register. A method and reference implementation is presented here for generating engineering ID's that are unique without requiring a central registry to maintain cognizance of which ID's have been issued and which are available. 
 
