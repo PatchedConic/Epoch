@@ -24,9 +24,7 @@ def main():
                        type = str,
                        metavar = "<filepath>",
                        help = "File to save ID's to. Default is stdout.")
-    group.add_argument("-g", "--gui",
-                       action = "store_true",
-                       help = "Launch GUI application")
+
     group.add_argument("-c", "--check",
                        action = "store",
                        type = str,
@@ -34,17 +32,11 @@ def main():
                        help = "Check part number for validity")
     parser.add_argument("--version",
                         action = "version",
-                        version = '%(prog)s 0.2')
+                        version = '%(prog)s 0.1.0')
 
     args = parser.parse_args()
     
     generator = Generator()
-
-    if args.gui:
-        app = QApplication(sys.argv)
-        window = Epoch()
-        window.show()
-        return app.exec()
 
     if args.check:
         check = generator.check(args.check)
