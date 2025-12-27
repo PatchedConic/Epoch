@@ -3,6 +3,7 @@ from PyQt6.QtWidgets import QTabWidget, QSpinBox, QListWidget, QApplication, QFi
 from PyQt6.QtGui import QClipboard
 from PyQt6.QtCore import Qt
 from Epoch import Generator
+import sys
 import csv
 
 class Epoch(QMainWindow):
@@ -179,3 +180,11 @@ class Check_Single(QWidget):
         status = self.generator.check(self.check_field.field.text())
         self.check_field.check_status.setText("Passed \u2705" if status else u"Failed \u274c")
         
+def main():
+    app = QApplication(sys.argv)
+    window = Epoch()
+    window.show()
+    return app.exec()
+
+if __name__ == "__main__":
+    main()
