@@ -1,11 +1,12 @@
 import datetime
 from time import sleep
-# Testing 
+
+INTERVAL = .1  # seconds
 
 class Generator():
 
     EPOCH = datetime.datetime(2025, 2, 13, tzinfo = datetime.timezone.utc)
-    PRIMES = [3, 5, 7, 11, 13, 17, 19, 23, 29]
+    PRIMES = [3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59]
 
     def check(self, value: str) -> bool:
         timestamp = value[:-1]
@@ -23,8 +24,8 @@ class Generator():
         identifiers = []
 
         for i in range(n):
-            sleep((100-self.get_tick()%100)/1000)
-            timecode = int(self.get_tick()/100)
+            sleep((INTERVAL-(self.get_tick()%INTERVAL)))
+            timecode = int(self.get_tick()/INTERVAL)
             pairity = self.pairity(timecode)
             value = int_to_base34(timecode) + pairity
             if self.check(value) == False:
@@ -32,11 +33,11 @@ class Generator():
             identifiers.append(value)
         return tuple(identifiers)
  
-    def get_tick(self) -> int:
+    def get_tick(self) -> float:
         """
-        Get the current time in 100's of microseconds since the epoch.
+        Get the current time in seconds since the epoch.
         """
-        return int((datetime.datetime.now(datetime.timezone.utc) - self.EPOCH).total_seconds()*1000)
+        return round((datetime.datetime.now(datetime.timezone.utc) - self.EPOCH).total_seconds(), 3)
 
 
     def pairity(self, code: int) -> str:
