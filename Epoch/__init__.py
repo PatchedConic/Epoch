@@ -24,20 +24,22 @@ class Generator():
         identifiers = []
 
         for i in range(n):
-            sleep((INTERVAL-(self.get_tick()%INTERVAL)))
-            timecode = int(self.get_tick()/INTERVAL)
+            current_tick = self.get_tick()
+            timecode = int(current_tick//INTERVAL)
             pairity = self.pairity(timecode)
             value = int_to_base34(timecode) + pairity
             if self.check(value) == False:
                 raise Exception("Generator pairity check failed")
             identifiers.append(value)
+            sleep(INTERVAL)
         return tuple(identifiers)
  
     def get_tick(self) -> float:
         """
         Get the current time in seconds since the epoch.
         """
-        return round((datetime.datetime.now(datetime.timezone.utc) - self.EPOCH).total_seconds(), 3)
+        tick = round((datetime.datetime.now(datetime.timezone.utc) - self.EPOCH).total_seconds(), 3)
+        return tick
 
 
     def pairity(self, code: int) -> str:
