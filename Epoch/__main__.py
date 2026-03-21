@@ -39,8 +39,15 @@ def main():
 
     if args.check:
         check = generator.check(args.check)
-        print("Pass" if check else "Failed")
-        sys.exit(0 if check else 1)
+        if check:
+            decoded_timestamp = generator.decode(args.check)
+            print("PASS")
+            print(f"ID TIMESTAMP: {decoded_timestamp.strftime("%Y%m%d %H:%M:%S")}")
+            sys.exit(0)
+        else:
+            print("FAILED")
+            sys.exit(1)
+
     
     if args.num_ID > 19:
         print(f"Large number of ID's requested. Estimated repsonse time: {args.num_ID*INTERVAL} seconds.")

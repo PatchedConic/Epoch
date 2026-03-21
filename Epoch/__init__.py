@@ -46,6 +46,13 @@ class Generator():
         split_code = [int(i) for i in str(code)]
         pairity = sum([(split_code[i] * self.PRIMES[i]) for i in range(len(split_code))])%34
         return int_to_base34(pairity)
+    
+    def decode(self, ID: str) -> datetime.datetime:
+        if not self.check(ID):
+            return
+        decoded_datetime = self.EPOCH + datetime.timedelta(seconds = 
+                                                           base34_to_int(ID[:-1])*INTERVAL)
+        return decoded_datetime
 
 
 
