@@ -63,13 +63,10 @@ Passing an integer value will produce `num_ID` valid ID's.
        
 Saves either a singular or multiple ID's to `<filepath>.csv`
 
-`-g --gui`
-
-Launches GUI.
 
 `-c --check <ID>` 
 
-Will perform a check on `<ID>` and return `Pass` or `Fail`.
+Will perform a check on `<ID>` and return `Pass` or `Fail` along with the date and time of the ID's creation.
 
 `--version`
 
