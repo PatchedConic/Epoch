@@ -1,7 +1,6 @@
 import argparse
 from Epoch import Generator, INTERVAL
 import sys
-from Epoch.GUI import Epoch
 from PyQt6.QtWidgets import QApplication
 import csv
 
