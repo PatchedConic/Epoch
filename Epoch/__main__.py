@@ -1,5 +1,5 @@
 import argparse
-from Epoch import Generator
+from Epoch import Generator, INTERVAL
 import sys
 from Epoch.GUI import Epoch
 from PyQt6.QtWidgets import QApplication
@@ -44,7 +44,7 @@ def main():
         sys.exit(0 if check else 1)
     
     if args.num_ID > 19:
-        print(f"Large number of ID's requested. Estimated repsonse time: {args.num_ID/10} seconds.")
+        print(f"Large number of ID's requested. Estimated repsonse time: {args.num_ID*INTERVAL} seconds.")
 
     if args.file:
         writer = csv.writer(open(args.file, "w", newline=''))
